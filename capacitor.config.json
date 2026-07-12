@@ -1,0 +1,8 @@
+{
+  "appId": "com.yourname.badminton",
+  "appName": "羽毛球AI教练",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

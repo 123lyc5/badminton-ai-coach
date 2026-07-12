@@ -1,0 +1,126 @@
+:root {
+    --primary: #1a73e8;
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, 'PingFang SC', sans-serif; background: #f5f7fa; color: #333; }
+
+/* ===== 页头 & 导航 ===== */
+.header { background: linear-gradient(135deg, var(--primary), #0d47a1); color: white; padding: 24px 20px; text-align: center; }
+.header h1 { font-size: 1.8em; }
+.header p { opacity: 0.85; margin-top: 6px; }
+.nav { display: flex; justify-content: center; gap: 8px; padding: 12px; background: white; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; border-bottom: 1px solid #eee; }
+.nav button { padding: 8px 18px; border: 2px solid var(--primary); background: white; color: var(--primary); border-radius: 30px; font-size: 14px; font-weight: 600; min-height: 44px; cursor: pointer; transition: 0.2s; }
+.nav button.active, .nav button:hover { background: var(--primary); color: white; }
+
+/* ===== 容器 & 页面 ===== */
+.container { max-width: 1100px; margin: 0 auto; padding: 16px; }
+.page { display: none; animation: fadeUp 0.3s ease; }
+.page.active { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ===== 动作卡片 ===== */
+.category-title { font-size: 1.4em; color: var(--primary); padding: 12px 0; border-bottom: 3px solid var(--primary); margin: 20px 0 16px; }
+.action-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.action-card { background: white; border-radius: 12px; padding: 16px; cursor: pointer; transition: 0.2s; box-shadow: var(--shadow); border-left: 4px solid var(--primary); }
+.action-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.action-card .name { font-size: 1.2em; font-weight: bold; color: var(--primary); }
+.action-card .desc { color: #666; margin-top: 4px; font-size: 0.9em; }
+.action-card .stars { color: #f5a623; margin-top: 6px; }
+
+/* ===== 详情页 ===== */
+.back-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 30px; cursor: pointer; font-size: 14px; margin-bottom: 16px; min-height: 44px; }
+.detail-hero { background: linear-gradient(135deg, var(--primary), #0d47a1); color: white; padding: 24px; border-radius: 16px; text-align: center; margin-bottom: 16px; }
+.detail-hero h2 { font-size: 1.8em; }
+.detail-hero .cat { opacity: 0.8; margin-top: 4px; }
+.video-wrapper { position: relative; padding-bottom: 56.25%; background: #000; border-radius: 12px; overflow: hidden; }
+.video-wrapper iframe { position: absolute; top:0; left:0; width:100%; height:100%; }
+.video-tip { background: #e8f0fe; padding: 12px 16px; border-radius: 8px; margin-top: 12px; color: var(--primary); font-size: 0.95em; }
+.content-card { background: white; border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.content-card h3 { color: var(--primary); margin-bottom: 12px; }
+.content-card ul { list-style: none; }
+.content-card li { padding: 10px 14px; margin-bottom: 6px; border-radius: 8px; font-size: 0.95em; }
+.step-li { background: #f5f7fa; display: flex; align-items: center; gap: 12px; }
+.step-num { background: var(--primary); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.error-li { background: #fff5f5; }
+.error-li::before { content: "✗"; color: #e53935; font-weight: bold; margin-right: 10px; }
+.tip-li { background: #f0fff4; }
+.tip-li::before { content: "✓"; color: #2e7d32; font-weight: bold; margin-right: 10px; }
+.practice-btns { display: flex; gap: 12px; margin-top: 16px; }
+.practice-btns button { flex: 1; padding: 14px; border: none; border-radius: 12px; font-size: 1em; font-weight: bold; cursor: pointer; transition: 0.2s; min-height: 44px; }
+.btn-cam { background: var(--primary); color: white; }
+.btn-cam:hover { background: #1557b0; }
+.btn-upload { background: white; color: var(--primary); border: 2px solid var(--primary) !important; }
+.btn-upload:hover { background: #e8f0fe; }
+
+/* ===== 摄像头 ===== */
+.cam-box { position: relative; max-width: 640px; margin: 0 auto; background: #000; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; }
+.cam-box video { width:100%; height:100%; object-fit: cover; }
+.cam-box canvas { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; }
+.guide { position: absolute; top:10%; left:12%; width:76%; height:80%; border: 3px dashed rgba(255,255,255,0.3); border-radius: 12px; pointer-events: none; }
+#cam-status { position: absolute; bottom: 12px; left: 12px; color: #fff; background: rgba(0,0,0,0.6); padding: 4px 12px; border-radius: 20px; font-size: 12px; backdrop-filter: blur(4px); display: none; }
+.cam-controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+.cam-controls select, .cam-controls button { padding: 10px 16px; border-radius: 10px; font-size: 15px; min-height: 44px; border: 2px solid #ddd; background: white; }
+.cam-controls .btn-capture { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; }
+
+/* ===== 进度条 ===== */
+.progress-wrap { margin: 14px 0 0; overflow: hidden; border-radius: 8px; background: #e8e8e8; height: 8px; }
+.progress-bar { height: 100%; width: 0; background: var(--primary); border-radius: 8px; animation: progress-fill 3s ease-in-out forwards; }
+@keyframes progress-fill { 0% { width: 0; } 30% { width: 45%; } 60% { width: 75%; } 100% { width: 100%; } }
+
+/* ===== 结果盒子 ===== */
+.result-box { background: white; border-radius: var(--radius); padding: 24px; margin-top: 16px; box-shadow: var(--shadow); }
+.score-big { text-align: center; }
+.score-big .num { font-size: 3.8em; font-weight: bold; color: var(--primary); }
+.score-big .label { color: #999; }
+.fb-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #f5f7fa; border-radius: 8px; margin-top: 8px; }
+.fb-icon { font-size: 1.1em; }
+.fb-icon.ok { color: #2e7d32; }
+.fb-icon.warn { color: #f5a623; }
+.fb-icon.err { color: #e53935; }
+
+/* ===== 等级卡片 ===== */
+.level-card { border-radius: var(--radius); padding: 30px; text-align: center; margin-bottom: 20px; color: white; position: relative; overflow: hidden; }
+.level-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); }
+.level-card .level-badge { font-size: 4em; font-weight: 900; line-height: 1; margin: 10px 0; position: relative; }
+.level-card .level-label { font-size: 1.2em; opacity: 0.9; }
+.level-card .level-name { font-size: 1.5em; font-weight: bold; margin-top: 8px; }
+.level-card-lv1, .level-card-lv2 { background: linear-gradient(135deg, #667eea, #764ba2); }
+.level-card-lv3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.level-card-lv4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+.level-card-lv5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+.level-card-lv6 { background: linear-gradient(135deg, #f5af19, #f12711); }
+
+/* ===== 雷达条 ===== */
+.radar-box { background: white; border-radius: 12px; padding: 18px; margin-top: 16px; }
+.radar-item { display: flex; align-items: center; margin-bottom: 10px; }
+.radar-label { width: 90px; font-size: 14px; color: #666; flex-shrink: 0; }
+.radar-track { flex: 1; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; }
+.radar-fill { height: 100%; border-radius: 5px; transition: width 0.8s ease; }
+.radar-val { width: 36px; text-align: right; font-weight: bold; font-size: 14px; margin-left: 8px; }
+
+/* ===== 训练计划按钮 ===== */
+.train-btn { display: block; width: 100%; padding: 14px; margin-top: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; min-height: 44px; }
+.train-btn:hover { background: #1557b0; }
+
+/* ===== 上传 ===== */
+.upload-zone { border: 3px dashed #ccc; border-radius: var(--radius); padding: 40px 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+.upload-zone:hover { border-color: var(--primary); background: #f0f7ff; }
+.upload-zone .icon { font-size: 3em; }
+.upload-zone p { color: #666; margin-top: 8px; }
+#preview-video { max-width: 640px; width: 100%; display: none; margin: 12px auto; border-radius: 12px; }
+
+/* ===== 页脚 ===== */
+footer { text-align: center; padding: 24px; color: #999; font-size: 14px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 600px) {
+    .practice-btns { flex-direction: column; }
+}
+@media (max-width: 480px) {
+    .cam-controls { flex-direction: column; align-items: stretch; }
+    .nav button { font-size: 13px; padding: 6px 14px; }
+    .score-big .num { font-size: 2.8em; }
+    .level-card .level-badge { font-size: 3em; }
+}

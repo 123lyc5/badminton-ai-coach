@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>羽毛球AI教练</title>
+    <!-- MediaPipe CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+    <!-- 样式文件 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 页头 -->
+    <div class="header">
+        <h1>🏸 羽毛球AI教练</h1>
+        <p>专业教学 + 中羽等级评估</p>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="nav">
+        <button class="active" id="nav-home">📋 动作库</button>
+        <button id="nav-camera">📷 摄像头</button>
+        <button id="nav-upload">📤 视频上传</button>
+    </div>
+
+    <div class="container">
+        <!-- 首页 -->
+        <div id="home" class="page active"></div>
+
+        <!-- 详情页 -->
+        <div id="detail" class="page"></div>
+
+        <!-- 摄像头页 -->
+        <div id="camera" class="page">
+            <div class="cam-box">
+                <video id="cam-video" autoplay playsinline></video>
+                <canvas id="cam-canvas"></canvas>
+                <div class="guide"></div>
+                <div id="cam-status">初始化中...</div>
+            </div>
+            <div class="cam-controls">
+                <select id="cam-select"><option value="">选择动作...</option></select>
+                <button class="btn-capture" onclick="captureFrame()">📸 拍照分析</button>
+            </div>
+            <div id="cam-result" style="display:none;" class="result-box"></div>
+        </div>
+
+        <!-- 上传页 -->
+        <div id="upload" class="page">
+            <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+                <div class="icon">📤</div>
+                <p>点击选择视频文件</p>
+                <p style="color:#999;font-size:0.85em;">支持 MP4、WebM</p>
+                <input type="file" id="file-input" accept="video/*" onchange="handleFile(event)" style="display:none;">
+            </div>
+            <video id="preview-video" controls></video>
+            <div class="cam-controls">
+                <select id="upload-select"><option value="">选择动作类型...</option></select>
+                <button class="btn-capture" id="upload-btn" onclick="uploadVideo()" disabled>🔍 开始分析</button>
+            </div>
+            <div id="upload-result" style="display:none;" class="result-box"></div>
+        </div>
+    </div>
+
+    <footer>🏸 长期维护版 v2.0</footer>
+
+    <!-- 核心逻辑模块 -->
+    <script type="module">
+        import './data.js';
+        import './analyzer.js';
+        import './app.js';
+    </script>
+</body>
+</html>

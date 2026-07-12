@@ -1,0 +1,14 @@
+{
+  "name": "badminton-coach-app",
+  "version": "1.1.0",
+  "description": "羽毛球AI教练 - 中羽等级评估",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static app, no build needed'"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/android": "^6.0.0"
+  }
+}
